@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "../Button";
-import Toast from "../Toast";
+import { ToastContext } from "../ToastProvider";
 
 import styles from "./ToastPlayground.module.css";
 import { VARIANT_OPTIONS } from "../constants";
@@ -12,21 +12,15 @@ const DEFAULT_VARIANT = "notice";
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState(DEFAULT_VARIANT);
-  const [toastrs, setToastrs] = React.useState([]);
+  const { toastrs, addToastr, dismissToastr } = React.useContext(ToastContext);
 
   function handleSubmit(event) {
     event.preventDefault();
-    const newToastr = { id: Math.random(), variant, content: message };
-    setToastrs([...toastrs, newToastr]);
+    addToastr(variant, message);
 
     //cleanup the form
     setMessage("");
     setVariant(DEFAULT_VARIANT);
-  }
-
-  function dismissToastr(id) {
-    const filteredToastrs = toastrs.filter((item) => item.id !== id);
-    setToastrs(filteredToastrs);
   }
 
   return (
