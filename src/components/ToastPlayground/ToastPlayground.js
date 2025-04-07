@@ -16,6 +16,7 @@ function ToastPlayground() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     addToastr(variant, message);
 
     //cleanup the form
@@ -45,6 +46,7 @@ function ToastPlayground() {
             <div className={styles.inputWrapper}>
               <textarea
                 id="message"
+                required
                 className={styles.messageInput}
                 value={message}
                 onChange={(event) => {
