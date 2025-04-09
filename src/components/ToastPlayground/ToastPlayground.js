@@ -12,7 +12,7 @@ const DEFAULT_VARIANT = "notice";
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState(DEFAULT_VARIANT);
-  const { toastrs, addToastr, dismissToastr } = React.useContext(ToastContext);
+  const { addToastr } = React.useContext(ToastContext);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -31,7 +31,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf items={toastrs} handleDismiss={dismissToastr} />
+      <ToastShelf />
 
       <form onSubmit={handleSubmit}>
         <div className={styles.controlsWrapper}>

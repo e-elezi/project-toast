@@ -1,10 +1,13 @@
 import React from "react";
+import { ToastContext } from "../ToastProvider";
 
 import Toast from "../Toast";
 import styles from "./ToastShelf.module.css";
 
 //{id, variant, content, handleDismiss}
-function ToastShelf({ items, handleDismiss }) {
+function ToastShelf() {
+  const { toastrs } = React.useContext(ToastContext);
+
   return (
     <ol
       className={styles.wrapper}
@@ -12,13 +15,8 @@ function ToastShelf({ items, handleDismiss }) {
       aria-live="polite"
       aria-label="Notification"
     >
-      {items.map(({ id, variant, content }) => (
-        <Toast
-          key={id}
-          variant={variant}
-          content={content}
-          handleDismiss={() => handleDismiss(id)}
-        />
+      {toastrs.map(({ id, variant, content }) => (
+        <Toast key={id} id={id} variant={variant} content={content} />
       ))}
     </ol>
   );

@@ -6,6 +6,7 @@ import {
   Info,
   X,
 } from "react-feather";
+import { ToastContext } from "../ToastProvider";
 
 import VisuallyHidden from "../VisuallyHidden";
 
@@ -19,7 +20,9 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ handleDismiss, variant, content }) {
+function Toast({ id, variant, content }) {
+  const { dismissToastr } = React.useContext(ToastContext);
+
   if (!VARIANT_OPTIONS.includes(variant)) {
     throw Error(`The only possible variants are ${VARIANT_OPTIONS}`);
   }
@@ -34,7 +37,7 @@ function Toast({ handleDismiss, variant, content }) {
       <VisuallyHidden>{variant} - </VisuallyHidden>
       <button
         className={styles.closeButton}
-        onClick={handleDismiss}
+        onClick={() => dismissToastr(id)}
         aria-label="Dismiss message"
         aria-live="off"
       >
